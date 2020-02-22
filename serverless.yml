@@ -43,12 +43,14 @@ provider:
         - "Fn::GetAtt": [ WorkerTable, Arn]
 
 functions:
-  hello:
-    handler: handler.hello
+  create:
+    handler: functions/member/create.main
     events:
       - http:
-          path: hello
-          method: get
+          path: member
+          method: post
+          cors: true
+          authorizer: aws_iam
 
 resources:
   - ${file(resources/dynamodb-table.yml)}
