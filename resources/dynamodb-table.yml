@@ -1,0 +1,25 @@
+Resources:
+  MemberTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.memberTableName}
+      AttributeDefinitions:
+        - AttributeName: memberId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: memberId
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  WorkerTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.workerTableName}
+      AttributeDefinitions:
+        - AttributeName: workerId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: workerId
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
