@@ -43,7 +43,7 @@ provider:
         - "Fn::GetAtt": [ WorkerTable, Arn]
 
 functions:
-  create:
+  member_create:
     handler: functions/member/create.main
     events:
       - http:
@@ -52,6 +52,49 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  member_get:
+    handler: functions/member/get.main
+    event:
+      - http:
+          path: member
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  member_delete:
+    handler: functions/member/delete.main
+    event:
+      - http:
+          path: member
+          method: delete
+          cors: true
+          authorizer: aws_iam
+  worker_create:
+    handler: functions/worker/create.main
+    event:
+      - http:
+          path: worker
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  worker_get:
+    handler: functions/worker/get.main
+    event:
+      - http:
+          path: worker
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  worker_delete:
+    handler: functions/worker/delete.main
+    event:
+      - http:
+          path: worker
+          method: delete
+          cors: true
+          authorizer: aws_iam
 resources:
   - ${file(resources/dynamodb-table.yml)}
   - ${file(resources/api-gateway-errors.yml)}
