@@ -29,7 +29,7 @@ export async function main(event) {
   };
   try {
     const response = await dynamoDbLib.call('update', params);
-    return success(response.Item);
+    return success(response.Attributes);
   } catch (e) {
     return failure({ status: false });
   }

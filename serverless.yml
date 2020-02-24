@@ -66,6 +66,15 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  member_update:
+    handler: functions/member/update.main
+    event:
+      - http:
+          path: member/profile
+          method: patch
+          cors: true
+          authorizer: aws_iam
+
   member_billing:
     handler: functions/member/billing.main
     event:

@@ -1,0 +1,8 @@
+{
+  "body": "{\"contactNumber\":\"077745324341\"}",
+  "requestContext":{
+      "identity":{
+          "cognitoIdentityId": "USER-SUB-1234"
+      }
+  }
+}
