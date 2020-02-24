@@ -6,7 +6,6 @@ package:
   individually: true
 
 plugins:
-  - serverless-dynamodb-local
   - serverless-bundle # Package our functions with Webpack
   - serverless-offline
   - serverless-dotenv-plugin # Load .env as environment variables
@@ -15,11 +14,7 @@ custom:
   stage: ${opt:stage,self:provider.stage}
   memberTableName: '${self:custom.stage}-members'
   workerTableName: '${self:custom.stage}-workers'
-  dynamodb:
-    start:
-       migrate: true
-    stages:
-        - dev
+
 
 provider:
   name: aws
@@ -29,6 +24,7 @@ provider:
   environment:
     memberTableName: ${self:custom.memberTableName}
     workerTableName: ${self:custom.workerTableName}
+    stripeSecretKey: 'sk_test_9vANlEJ1q6VtfhPxRRL0VBc400uCrTmORY'
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -69,6 +65,16 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
+
+  member_billing:
+    handler: functions/member/billing.main
+    event:
+      - http:
+          path: member/billing
+          method: post
+          cors: true
+          authorizer: aws_iam
+
   worker_create:
     handler: functions/worker/create.main
     event:
