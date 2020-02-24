@@ -1,0 +1,8 @@
+{
+  "body":"{\"fullName\":\"Adam chris\",\"contactNumber\":\"083123123123\",\"nic\":\"213213121241v\",\"address\":\"14 charles dehiwala\",\"gender\":\"male\",\"age\":\"32\",\"skill\":\"driver\"}",
+  "requestContext":{
+    "identity":{
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
+  }
+}

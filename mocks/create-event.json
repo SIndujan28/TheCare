@@ -1,8 +1,0 @@
-{
-    "body":"{\"fullName\":\"Adam chris\",\"contactNumber\":\"083123123123\",\"nic\":\"213213121241v\",\"address\":\"14 charles dehiwala\",\"propertDocument\":\"efjefewflkwefelk13e3e1\",\"occupation\":\"business man\",\"incomeLevel\":\"10000\"}",
-    "requestContext":{
-      "Identity":{
-        "cognitoIdentityId": "USER-SUB-1234"
-      }
-    }
-}
