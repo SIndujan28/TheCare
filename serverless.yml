@@ -92,6 +92,15 @@ functions:
           method: post,
           cors: true,
           authorizer: aws_iam
+
+  member_listSubscription:
+    handler: functions/member/subscription/listSubscription.main
+    event:
+      - http:
+          path: member/list_subscription
+          method: get,
+          cors: true,
+          authorizer: aws_iam
   member_cancelSubscription:
     handler: functions/member/subscription/cancelSubscription.main
     event:
