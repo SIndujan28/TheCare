@@ -16,6 +16,7 @@ export async function main(event) {
       occupation: data.occupation,
       incomeLevel: data.incomeLevel,
       createdAt: Date.now(),
+      stripe: {},
     },
   };
   try {
