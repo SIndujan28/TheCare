@@ -17,6 +17,7 @@ export async function main(event) {
       incomeLevel: data.incomeLevel,
       createdAt: Date.now(),
       stripe: {},
+      subscriptions: [],
     },
   };
   try {
