@@ -1,0 +1,8 @@
+{
+  "body":"{\"paymentMethod\":\"pm_card_visa\",\"email\":\"sindu289@gmail.com\",\"planId\":\"plan_GnEEzMCb2QTsSU\"}",
+  "requestContext": {
+      "identity": {
+          "cognitoIdentityId": "USER-SUB-1234"
+      }
+  }
+}
