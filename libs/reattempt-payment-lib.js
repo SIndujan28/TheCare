@@ -4,7 +4,6 @@ const stripe = stripePackage(process.env.stripeSecretKey);
 async function attachMethod(paymentMethod, customerId) {
   try {
     const response = await stripe.paymentMethods.attach(paymentMethod, { customer: customerId });
-    console.log(response);
     return response;
   } catch (e) {
     throw Error(e.message);

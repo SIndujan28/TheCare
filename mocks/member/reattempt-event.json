@@ -1,0 +1,8 @@
+{
+  "body":"{\"paymentMethod\":\"pm_card_visa\",\"invoiceId\":\"in_1GFvmzEcL7FdKpTU61kBd9af\"}",
+  "requestContext": {
+      "identity": {
+          "cognitoIdentityId": "USER-SUB-1234"
+      }
+  }
+}
