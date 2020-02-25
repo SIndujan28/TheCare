@@ -84,6 +84,31 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  member_subscription:
+    handler: functions/member/subscription/createSubscription.main
+    event:
+      - http:
+          path: member/create_subscription
+          method: post,
+          cors: true,
+          authorizer: aws_iam
+  member_cancelSubscription:
+    handler: functions/member/subscription/cancelSubscription.main
+    event:
+      - http:
+          path: member/cancel_subscription
+          method: delete,
+          cors: true,
+          authorizer: aws_iam
+
+  member_getSubscription:
+    handler: functions/member/subscription/getSubscription.main
+    event:
+      - http:
+          path: member/get_subscription/{subscriptionId}
+          method: get,
+          cors: true,
+          authorizer: aws_iam
   worker_create:
     handler: functions/worker/create.main
     event:
