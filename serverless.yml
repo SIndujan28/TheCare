@@ -89,8 +89,8 @@ functions:
     event:
       - http:
           path: member/create_subscription
-          method: post,
-          cors: true,
+          method: post
+          cors: true
           authorizer: aws_iam
 
   member_listSubscription:
@@ -98,16 +98,26 @@ functions:
     event:
       - http:
           path: member/list_subscription
-          method: get,
-          cors: true,
+          method: get
+          cors: true
           authorizer: aws_iam
+
+  member_listSubscriptionPlans:
+    handler: functions/member/subscription/listSubscriptionPlans.main
+    event:
+      - http:
+          path: member/list_subscription_plans
+          method: get
+          cors: true
+          authorizer: aws_iam
+
   member_cancelSubscription:
     handler: functions/member/subscription/cancelSubscription.main
     event:
       - http:
           path: member/cancel_subscription
-          method: delete,
-          cors: true,
+          method: delete
+          cors: true
           authorizer: aws_iam
 
   member_getSubscription:
