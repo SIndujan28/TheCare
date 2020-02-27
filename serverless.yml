@@ -129,6 +129,16 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+
+  member_request:
+    handler: functions/requestService.main
+    event:
+      - http:
+          path: member/request
+          method: post
+          cors: true
+          authorizer: aws_iam
+
   worker_create:
     handler: functions/worker/create.main
     event:
