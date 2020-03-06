@@ -7,6 +7,7 @@ A membership based platform that provides veteran-grade help such as maids,careg
 3. AWS SQS
 4. Stripe
 5. Cognito
+6. DynamoDB
 
 ## List of features for initial API
   * Create members/workers
