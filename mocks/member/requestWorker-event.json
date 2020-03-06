@@ -1,0 +1,8 @@
+{
+  "body":"{\"subscription_id\":\"324139041309sd1203129\",\"subscription_plan\":\"2311fdf21\",\"worker_type\":\"driver\"}",
+  "requestContext":{
+    "identity":{
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
+  }
+}

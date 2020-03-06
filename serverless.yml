@@ -144,12 +144,14 @@ functions:
               - Arn
           batchSize: 10
 
-  hello:
-    handler: functions/sqscheck.hello
+  request_worker:
+    handler: functions/member/requestWorker.main
     events:
       - http:
-          method: get
-          path: hello
+          method: post
+          path: member/request
+          cors: true
+          authorizer: aws_iam
 
   # worker_create:
   #   handler: functions/worker/create.main
