@@ -15,7 +15,7 @@ custom:
   memberTableName: '${self:custom.stage}-members'
   workerTableName: '${self:custom.stage}-workers'
   stripeSecretKey: '${env:stripeSecretKey}'
-
+  ACCOUNT_ID: '${env:ACCOUNT_ID}'
 
 provider:
   name: aws
@@ -26,6 +26,8 @@ provider:
     memberTableName: ${self:custom.memberTableName}
     workerTableName: ${self:custom.workerTableName}
     stripeSecretKey: ${self:custom.stripeSecretKey}
+    ACCOUNT_ID: ${self:custom.ACCOUNT_ID}
+
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -35,9 +37,11 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - sqs:SendMessage
       Resource:
         - "Fn::GetAtt": [ MemberTable, Arn]
         - "Fn::GetAtt": [ WorkerTable, Arn]
+        - "arn:aws:sqs:${self:provider.region}:*:MyQueue"
 
 functions:
   member_create:
@@ -49,122 +53,131 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  member_get:
-    handler: functions/member/get.main
+  # member_get:
+  #   handler: functions/member/get.main
+  #   event:
+  #     - http:
+  #         path: member
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam
+
+  # member_delete:
+  #   handler: functions/member/delete.main
+  #   event:
+  #     - http:
+  #         path: member
+  #         method: delete
+  #         cors: true
+  #         authorizer: aws_iam
+
+  # member_update:
+  #   handler: functions/member/update.main
+  #   event:
+  #     - http:
+  #         path: member/profile
+  #         method: patch
+  #         cors: true
+  #         authorizer: aws_iam
+
+  # member_subscription:
+  #   handler: functions/member/subscription/createSubscription.main
+  #   event:
+  #     - http:
+  #         path: member/create_subscription
+  #         method: post
+  #         cors: true
+  #         authorizer: aws_iam
+
+  # member_reattempt:
+  #   handler: functions/member/reattempt.main
+  #   event:
+  #     - http:
+  #         path: member/reattempt
+  #         method: post
+  #         cors: true
+  #         authorizer: aws_iam
+
+  # member_listSubscription:
+  #   handler: functions/member/subscription/listSubscription.main
+  #   event:
+  #     - http:
+  #         path: member/list_subscription
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam
+
+  # member_listSubscriptionPlans:
+  #   handler: functions/member/subscription/listSubscriptionPlans.main
+  #   event:
+  #     - http:
+  #         path: member/list_subscription_plans
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam
+
+  # member_cancelSubscription:
+  #   handler: functions/member/subscription/cancelSubscription.main
+  #   event:
+  #     - http:
+  #         path: member/cancel_subscription
+  #         method: delete
+  #         cors: true
+  #         authorizer: aws_iam
+
+  # member_getSubscription:
+  #   handler: functions/member/subscription/getSubscription.main
+  #   event:
+  #     - http:
+  #         path: member/get_subscription/{subscriptionId}
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam
+
+  hello:
+    handler: functions/sqscheck.sqsHello
+    event:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - MyQueue
+              - Arn
+          batchSize: 1
+
+  http_handler:
+    handler: functions/sqscheck.hello
     event:
       - http:
-          path: member
           method: get
-          cors: true
-          authorizer: aws_iam
+          path: hello
 
-  member_delete:
-    handler: functions/member/delete.main
-    event:
-      - http:
-          path: member
-          method: delete
-          cors: true
-          authorizer: aws_iam
+  # worker_create:
+  #   handler: functions/worker/create.main
+  #   event:
+  #     - http:
+  #         path: worker
+  #         method: post
+  #         cors: true
+  #         authorizer: aws_iam
 
-  member_update:
-    handler: functions/member/update.main
-    event:
-      - http:
-          path: member/profile
-          method: patch
-          cors: true
-          authorizer: aws_iam
+  # worker_get:
+  #   handler: functions/worker/get.main
+  #   event:
+  #     - http:
+  #         path: worker
+  #         method: get
+  #         cors: true
+  #         authorizer: aws_iam
 
-  member_subscription:
-    handler: functions/member/subscription/createSubscription.main
-    event:
-      - http:
-          path: member/create_subscription
-          method: post
-          cors: true
-          authorizer: aws_iam
-
-  member_reattempt:
-    handler: functions/member/reattempt.main
-    event:
-      - http:
-          path: member/reattempt
-          method: post
-          cors: true
-          authorizer: aws_iam
-
-  member_listSubscription:
-    handler: functions/member/subscription/listSubscription.main
-    event:
-      - http:
-          path: member/list_subscription
-          method: get
-          cors: true
-          authorizer: aws_iam
-
-  member_listSubscriptionPlans:
-    handler: functions/member/subscription/listSubscriptionPlans.main
-    event:
-      - http:
-          path: member/list_subscription_plans
-          method: get
-          cors: true
-          authorizer: aws_iam
-
-  member_cancelSubscription:
-    handler: functions/member/subscription/cancelSubscription.main
-    event:
-      - http:
-          path: member/cancel_subscription
-          method: delete
-          cors: true
-          authorizer: aws_iam
-
-  member_getSubscription:
-    handler: functions/member/subscription/getSubscription.main
-    event:
-      - http:
-          path: member/get_subscription/{subscriptionId}
-          method: get
-          cors: true
-          authorizer: aws_iam
-
-  member_request:
-    handler: functions/requestService.main
-    event:
-      - http:
-          path: member/request
-          method: post
-          cors: true
-          authorizer: aws_iam
-
-  worker_create:
-    handler: functions/worker/create.main
-    event:
-      - http:
-          path: worker
-          method: post
-          cors: true
-          authorizer: aws_iam
-
-  worker_get:
-    handler: functions/worker/get.main
-    event:
-      - http:
-          path: worker
-          method: get
-          cors: true
-          authorizer: aws_iam
-
-  worker_delete:
-    handler: functions/worker/delete.main
-    event:
-      - http:
-          path: worker
-          method: delete
-          cors: true
-          authorizer: aws_iam
+  # worker_delete:
+  #   handler: functions/worker/delete.main
+  #   event:
+  #     - http:
+  #         path: worker
+  #         method: delete
+  #         cors: true
+  #         authorizer: aws_iam
 resources:
   - ${file(resources/dynamodb-table.yml)}
   - ${file(resources/api-gateway-errors.yml)}
+  - ${file(resources/sqs-queue.yml)}
