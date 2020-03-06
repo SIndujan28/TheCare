@@ -153,6 +153,14 @@ functions:
           cors: true
           authorizer: aws_iam
 
+  telegramBot:
+    handler: functions/member/telegram.main
+    events:
+      - http:
+          method: post
+          path: member/telegram
+          cors: true
+
   # worker_create:
   #   handler: functions/worker/create.main
   #   event:
