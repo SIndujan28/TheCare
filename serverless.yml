@@ -134,19 +134,19 @@ functions:
   #         cors: true
   #         authorizer: aws_iam
 
-  hello:
+  sqsHello:
     handler: functions/sqscheck.sqsHello
-    event:
+    events:
       - sqs:
           arn:
             Fn::GetAtt:
               - MyQueue
               - Arn
-          batchSize: 1
+          batchSize: 10
 
-  http_handler:
+  hello:
     handler: functions/sqscheck.hello
-    event:
+    events:
       - http:
           method: get
           path: hello

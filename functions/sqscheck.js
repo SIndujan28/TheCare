@@ -3,9 +3,9 @@ const AWS = require('aws-sdk');
 const sqs = new AWS.SQS({ region: 'ap-southeast-1' });
 
 const AWS_ACCOUNT = process.env.ACCOUNT_ID;
-const QUEUE_URL = `https://sqs.eu-west-1.amazonaws.com/${AWS_ACCOUNT}/MyQueue`;
+const QUEUE_URL = `https://sqs.ap-southeast-1.amazonaws.com/${AWS_ACCOUNT}/MyQueue`;
 
-module.exports.hello = (event, context, callback) => {
+export async function hello(event, context, callback) {
   const params = {
     MessageBody: 'Hola',
     QueueUrl: QUEUE_URL,
@@ -31,17 +31,19 @@ module.exports.hello = (event, context, callback) => {
         body: JSON.stringify({
           message: data.MessageId,
         }),
+        headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' },
       };
+      console.log('response', response);
 
       callback(null, response);
     }
   });
-};
+}
 
-module.exports.sqsHello = (event, context) => {
+export async function sqsHello(event, context) {
   console.log('it was called');
 
   console.log(event);
 
   context.done(null, '');
-};
+}
