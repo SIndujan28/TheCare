@@ -15,6 +15,7 @@ custom:
   memberTableName: '${self:custom.stage}-members'
   workerTableName: '${self:custom.stage}-workers'
   stripeSecretKey: '${env:stripeSecretKey}'
+  BOT_TOKEN: '${env:BOT_TOKEN}'
   ACCOUNT_ID: '${env:ACCOUNT_ID}'
 
 provider:
@@ -27,6 +28,7 @@ provider:
     workerTableName: ${self:custom.workerTableName}
     stripeSecretKey: ${self:custom.stripeSecretKey}
     ACCOUNT_ID: ${self:custom.ACCOUNT_ID}
+    BOT_TOKEN: ${self:custom.BOT_TOKEN}
 
   iamRoleStatements:
     - Effect: Allow

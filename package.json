@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "aws-sdk": "^2.624.0",
-    "stripe": "^8.20.0"
+    "request-promise": "^4.2.5",
+    "stripe": "^8.20.0",
+    "telegraf": "^3.36.0"
   }
 }
