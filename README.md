@@ -19,7 +19,7 @@ A membership based platform that provides veteran-grade help such as maids,careg
 
 ### Features
   - [x] Integrate AWS SQS for request system to handle events from multiple sources.
-  - [ ] Add support to invoke from telegramBot.
+  - [x] Add support to invoke from telegramBot.
   - [ ] Add support to invoke from Alexa.
 
 ### Requirements
