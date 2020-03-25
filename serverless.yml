@@ -55,86 +55,86 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  # member_get:
-  #   handler: functions/member/get.main
-  #   event:
-  #     - http:
-  #         path: member
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
+  member_get:
+    handler: functions/member/get.main
+    event:
+      - http:
+          path: member
+          method: get
+          cors: true
+          authorizer: aws_iam
 
-  # member_delete:
-  #   handler: functions/member/delete.main
-  #   event:
-  #     - http:
-  #         path: member
-  #         method: delete
-  #         cors: true
-  #         authorizer: aws_iam
+  member_delete:
+    handler: functions/member/delete.main
+    event:
+      - http:
+          path: member
+          method: delete
+          cors: true
+          authorizer: aws_iam
 
-  # member_update:
-  #   handler: functions/member/update.main
-  #   event:
-  #     - http:
-  #         path: member/profile
-  #         method: patch
-  #         cors: true
-  #         authorizer: aws_iam
+  member_update:
+    handler: functions/member/update.main
+    event:
+      - http:
+          path: member/profile
+          method: patch
+          cors: true
+          authorizer: aws_iam
 
-  # member_subscription:
-  #   handler: functions/member/subscription/createSubscription.main
-  #   event:
-  #     - http:
-  #         path: member/create_subscription
-  #         method: post
-  #         cors: true
-  #         authorizer: aws_iam
+  member_subscription:
+    handler: functions/member/subscription/createSubscription.main
+    event:
+      - http:
+          path: member/create_subscription
+          method: post
+          cors: true
+          authorizer: aws_iam
 
-  # member_reattempt:
-  #   handler: functions/member/reattempt.main
-  #   event:
-  #     - http:
-  #         path: member/reattempt
-  #         method: post
-  #         cors: true
-  #         authorizer: aws_iam
+  member_reattempt:
+    handler: functions/member/reattempt.main
+    event:
+      - http:
+          path: member/reattempt
+          method: post
+          cors: true
+          authorizer: aws_iam
 
-  # member_listSubscription:
-  #   handler: functions/member/subscription/listSubscription.main
-  #   event:
-  #     - http:
-  #         path: member/list_subscription
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
+  member_listSubscription:
+    handler: functions/member/subscription/listSubscription.main
+    event:
+      - http:
+          path: member/list_subscription
+          method: get
+          cors: true
+          authorizer: aws_iam
 
-  # member_listSubscriptionPlans:
-  #   handler: functions/member/subscription/listSubscriptionPlans.main
-  #   event:
-  #     - http:
-  #         path: member/list_subscription_plans
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
+  member_listSubscriptionPlans:
+    handler: functions/member/subscription/listSubscriptionPlans.main
+    event:
+      - http:
+          path: member/list_subscription_plans
+          method: get
+          cors: true
+          authorizer: aws_iam
 
-  # member_cancelSubscription:
-  #   handler: functions/member/subscription/cancelSubscription.main
-  #   event:
-  #     - http:
-  #         path: member/cancel_subscription
-  #         method: delete
-  #         cors: true
-  #         authorizer: aws_iam
+  member_cancelSubscription:
+    handler: functions/member/subscription/cancelSubscription.main
+    event:
+      - http:
+          path: member/cancel_subscription
+          method: delete
+          cors: true
+          authorizer: aws_iam
 
-  # member_getSubscription:
-  #   handler: functions/member/subscription/getSubscription.main
-  #   event:
-  #     - http:
-  #         path: member/get_subscription/{subscriptionId}
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
+  member_getSubscription:
+    handler: functions/member/subscription/getSubscription.main
+    event:
+      - http:
+          path: member/get_subscription/{subscriptionId}
+          method: get
+          cors: true
+          authorizer: aws_iam
 
   sqsHello:
     handler: functions/sqscheck.sqsHello
@@ -163,32 +163,32 @@ functions:
           path: member/telegram
           cors: true
 
-  # worker_create:
-  #   handler: functions/worker/create.main
-  #   event:
-  #     - http:
-  #         path: worker
-  #         method: post
-  #         cors: true
-  #         authorizer: aws_iam
+  worker_create:
+    handler: functions/worker/create.main
+    event:
+      - http:
+          path: worker
+          method: post
+          cors: true
+          authorizer: aws_iam
 
-  # worker_get:
-  #   handler: functions/worker/get.main
-  #   event:
-  #     - http:
-  #         path: worker
-  #         method: get
-  #         cors: true
-  #         authorizer: aws_iam
+  worker_get:
+    handler: functions/worker/get.main
+    event:
+      - http:
+          path: worker
+          method: get
+          cors: true
+          authorizer: aws_iam
 
-  # worker_delete:
-  #   handler: functions/worker/delete.main
-  #   event:
-  #     - http:
-  #         path: worker
-  #         method: delete
-  #         cors: true
-  #         authorizer: aws_iam
+  worker_delete:
+    handler: functions/worker/delete.main
+    event:
+      - http:
+          path: worker
+          method: delete
+          cors: true
+          authorizer: aws_iam
 resources:
   - ${file(resources/dynamodb-table.yml)}
   - ${file(resources/api-gateway-errors.yml)}
